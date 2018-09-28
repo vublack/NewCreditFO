@@ -21,21 +21,13 @@ public class CreditFoTest {
 
     @BeforeClass
     public static void setup() {
-        timeout = 60000;
-        collectionsTimeout = 60000;
+        timeout = 80000;
+        collectionsTimeout = 80000;
         baseUrl = "http://10.10.17.50:8080/barsroot/";
         browser = "ie";
         InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).arch32().setup();
         open("/");
     }
-    public void userDelay(int time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Test
     public void kreditFoTest() {
         Calculation calculation = page(Calculation.class);
