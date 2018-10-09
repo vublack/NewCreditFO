@@ -23,7 +23,7 @@ public class CreditFoTest {
     public static void setup() {
         timeout = 80000;
         collectionsTimeout = 80000;
-        baseUrl = "http://10.10.17.50:8080/barsroot/";
+        baseUrl = "http://10.10.17.50:8080/barsroot/account/login/";
         browser = "ie";
         InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).arch32().setup();
         open("/");
@@ -45,7 +45,7 @@ public class CreditFoTest {
         switchWindow.switchToMainFrame();
         searchPage.h1();
         switchWindow.switchToDefaultContent();
-
+        searchPage.chooseBranch();
         searchPage.searchFunction("Портфель НОВИХ кредитів ФО");
         switchWindow.switchToMainFrame();
         //Кнопка Новый КД(переключение на окно Нового КД)

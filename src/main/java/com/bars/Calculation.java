@@ -6,7 +6,7 @@ public class Calculation {
     public String randomNum(){
         //Вставка рандомного числа
         Random random = new Random();
-        int number = random.nextInt((899)+100);
+        int number = random.nextInt(899)+100;
         return String.valueOf(number);
     }
 }
