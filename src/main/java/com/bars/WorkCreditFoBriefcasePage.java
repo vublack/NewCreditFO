@@ -44,10 +44,6 @@ public class WorkCreditFoBriefcasePage {
     }
     public void checkEventsTimetableOfBriefcase(String expectedNum){
         List<SelenideElement> eventsTimetable = $$(By.xpath("//div[@class='x-grid-cell-inner ']")).filter(visible).shouldHaveSize(54);
-/*      !!!! Ожидание отображения полной коллекции
-        int sizeOfAllElement = $$("div.x-grid-cell-inner ").size();
-        List<SelenideElement> eventsTimetable = $$("div.x-grid-cell-inner ").filter(visible).shouldHave(size(sizeOfAllElement));
-*/
         List<String> eventsTimetableList = eventsTimetable.stream().map(WebElement::getText).collect(Collectors.toList());
         assertThat("None of elements contains sub-string", eventsTimetableList, hasItem(containsString(expectedNum)));
         System.out.println("Графік подій по портфелю" + eventsTimetableList);
