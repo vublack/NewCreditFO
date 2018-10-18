@@ -17,15 +17,20 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 public class CreditFoTest {
     @Rule
     public ScreenShooter screenShooter = ScreenShooter.failedTests();
-    public TestRule report = new TextReport();
+    @Rule
+    public TestRule report = new TextReport().onFailedTest(true).onSucceededTest(false);
 
     @BeforeClass
     public static void setup() {
-        timeout = 80000;
-        collectionsTimeout = 80000;
-        baseUrl = "http://10.10.17.50:8080/barsroot/account/login/";
+        timeout = 90000;
+        baseUrl = "http://10.10.17.22:8080/barsroot";
+//        baseUrl = "http://10.10.17.50:8080/barsroot/account/login/";
+//        baseUrl = "http://10.10.17.40:8080/barsroot/account/login/";
+//        baseUrl = "http://10.10.17.40:8082/barsroot/account/login/";
         browser = "ie";
+        startMaximized = true;
         InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).arch32().setup();
+//        System.setProperty("webdriver.ie.driver", ".\\IEDriverServer.exe");
         open("/");
     }
     @Test
@@ -39,8 +44,8 @@ public class CreditFoTest {
         FilterBeforFillingTable filterBeforFillingTable = page(FilterBeforFillingTable.class);
         WorkCreditFoBriefcasePage workCreditFoBriefcasePage = page(WorkCreditFoBriefcasePage.class);
         //Логин
-        loginPage.FillLoginForm("absadm01", "qwerty");
-        loginPage.Сontinue();
+        loginPage.fillLoginForm("absadm01", "qwerty");
+        loginPage.goOn();
         //Страница поиска
         switchWindow.switchToMainFrame();
         searchPage.h1();
@@ -68,8 +73,8 @@ public class CreditFoTest {
         newCreditFoPage.ratesButtonClick();
         newCreditFoPage.filterInputClick();
         newCreditFoPage.filterInput("9999");
-        newCreditFoPage.typeOfCredit();
-        newCreditFoPage.goalOfCredit();
+        newCreditFoPage.typeOfCredit("ФЛ стандарт");
+        newCreditFoPage.goalOfCredit("Поточна дiяльнiсть");
         newCreditFoPage.productOfCredit1();
         switchWindow.switchToOldWindow(newKdWindow);
         newCreditFoPage.productOfCredit2();
@@ -95,12 +100,13 @@ public class CreditFoTest {
         //Нажимаем на кнопку "Зберігти"
         newCreditFoPage.saveButtonClick();
         newCreditFoPage.confirmOfCreditCreate();
+        String newCreditREF = newCreditFoPage.getREF();
         switchWindow.closeWindow(newKdWindow);
         switchWindow.switchToOldWindow(briefcaseNewKdWindow);
         switchWindow.switchToMainFrame();
         briefcaseNewCreditFoPage.pressRefreshBriefcase();
         //Авторизація
-        briefcaseNewCreditFoPage.chooseNewCredit(numSum);
+        briefcaseNewCreditFoPage.chooseCredit("ФЛ стандарт", newCreditREF);
         briefcaseNewCreditFoPage.сreditAuthorization("0");
         switchWindow.switchToDefaultContent();
 
@@ -113,14 +119,13 @@ public class CreditFoTest {
         switchWindow.switchToMainFrame();
         //Робота з фільтром
         filterBeforFillingTable.clearFilter();
-        filterBeforFillingTable.setUserFilter(numSum);
-        filterBeforFillingTable.saveUserFilter(numSum);
-        filterBeforFillingTable.deleteUserFilter(numSum);
+        filterBeforFillingTable.setUserFilter(newCreditREF);
+        filterBeforFillingTable.saveUserFilter(newCreditREF);
+        filterBeforFillingTable.deleteUserFilter(newCreditREF);
         filterBeforFillingTable.furtherButtonClick();
         //Портфель Робочих кредитів(Побудава ГПК та Графіку подій по портфелю)
         String workCreditFoBriefcaseWindow = getWebDriver().getWindowHandle();
-        workCreditFoBriefcasePage.chooseCredit(numSum);
-
+        briefcaseNewCreditFoPage.chooseCredit("ФЛ стандарт", newCreditREF);
         workCreditFoBriefcasePage.buildRepaymentSchedule();
         switchWindow.forceSwitchToWindow(workCreditFoBriefcaseWindow);
         switchWindow.windowMaximize();
@@ -130,13 +135,13 @@ public class CreditFoTest {
         switchWindow.closeWindow(gpkWindow);
         switchWindow.switchToOldWindow(workCreditFoBriefcaseWindow);
         switchWindow.switchToMainFrame();
-        workCreditFoBriefcasePage.chooseCredit(numSum);
+        briefcaseNewCreditFoPage.chooseCredit("ФЛ стандарт", newCreditREF);
         workCreditFoBriefcasePage.eventsTimetableOfBriefcaseButton();
         switchWindow.forceSwitchToWindow(workCreditFoBriefcaseWindow);
         switchWindow.windowMaximize();
         workCreditFoBriefcasePage.chooseInterval(firstPaymentDate);
         filterBeforFillingTable.clearFilter();
-        filterBeforFillingTable.setUserFilter(numSum);
+        filterBeforFillingTable.setUserFilter(newCreditREF);
         filterBeforFillingTable.furtherButtonClick();
         String eventsTimetableWindow = getWebDriver().getWindowHandle();
         workCreditFoBriefcasePage.progressBar();

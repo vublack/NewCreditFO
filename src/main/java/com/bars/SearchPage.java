@@ -13,12 +13,12 @@ public class SearchPage {
         $(By.tagName("h1")).shouldHave(text("Оголошення"));
     }
 
-    public void searchFunction(String functionName) {
+    void searchFunction(String functionName) {
         $("#findOpersText").shouldBe(visible).setValue(functionName).pressEnter();
         String Opername = String.format("//*[@class='oper-name']/span[text()='%s']", functionName);
-        $(By.xpath(Opername)).shouldBe(visible).click();
+        $(byXpath(Opername)).shouldBe(visible).click();
     }
-    public void chooseBranch(){
+    void chooseBranch(){
         $(".btn_branches").shouldBe(visible).click();
         $(byXpath("//div[@id='treeview']/ul/li/ul/li/div/span[2]/span")).shouldBe(visible).shouldHave(text("300465")).click();
         getWebDriver().navigate().refresh();
