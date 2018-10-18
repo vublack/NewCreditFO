@@ -16,7 +16,7 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class CreditFoTest {
     @Rule
-    public ScreenShooter screenShooter = ScreenShooter.failedTests();
+    public ScreenShooter screenShooter = ScreenShooter.failedTests().to("test-results/reports");
     @Rule
     public TestRule report = new TextReport().onFailedTest(true).onSucceededTest(false);
 
