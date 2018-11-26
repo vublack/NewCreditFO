@@ -8,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
-
 import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
@@ -23,10 +22,12 @@ public class CreditFoTest {
     @BeforeClass
     public static void setup() {
         timeout = 90000;
-        baseUrl = "http://10.10.17.22:8080/barsroot";
-//        baseUrl = "http://10.10.17.50:8080/barsroot/account/login/";
-//        baseUrl = "http://10.10.17.40:8080/barsroot/account/login/";
-//        baseUrl = "http://10.10.17.40:8082/barsroot/account/login/";
+//        baseUrl = "http://10.10.17.22:8080/barsroot/account/login";
+//        baseUrl = "http://10.10.17.24:8080/barsroot/account/login";
+//        baseUrl = "http://10.10.17.50:8080/barsroot/account/login";
+//        baseUrl = "http://10.10.17.40:8080/barsroot/account/login";
+//        baseUrl = "http://10.10.17.40:8082/barsroot/account/login";
+//        baseUrl = "http://10.10.10.198:11111/barsroot/account/login";
         browser = "ie";
         startMaximized = true;
         InternetExplorerDriverManager.getInstance(DriverManagerType.IEXPLORER).arch32().setup();
@@ -69,6 +70,7 @@ public class CreditFoTest {
         newCreditFoPage.okpoButtonClick();
         newCreditFoPage.filterInputClick();
         newCreditFoPage.filterInput("96281701");
+//        newCreditFoPage.filterInput("97412501");
         switchWindow.switchToOldWindow(newKdWindow);
         newCreditFoPage.ratesButtonClick();
         newCreditFoPage.filterInputClick();

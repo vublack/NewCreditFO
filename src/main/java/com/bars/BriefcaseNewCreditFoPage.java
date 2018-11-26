@@ -22,6 +22,6 @@ class BriefcaseNewCreditFoPage {
         $(byXpath("(//*[@class='x-btn-inner x-btn-inner-center'])[text()='Так']")).shouldBe(visible).click();
         $(byXpath("//input[@name='M']")).shouldBe(visible).setValue(autorizationType);
         $(byXpath("(//*[@class= 'x-btn-inner x-btn-inner-center'])[text()='Виконати']")).shouldBe(visible).click();
-        $(byXpath("(//*[@class='x-btn-inner x-btn-inner-center'])[text()='OK']")).shouldBe(visible).click();
+        $(byXpath("//*[text()='Процедура виконана']/following::*[text()='OK']")).shouldBe(visible).click();
     }
 }
