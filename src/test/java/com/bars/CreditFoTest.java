@@ -108,7 +108,7 @@ public class CreditFoTest {
         switchWindow.switchToMainFrame();
         briefcaseNewCreditFoPage.pressRefreshBriefcase();
         //Авторизація
-        briefcaseNewCreditFoPage.chooseCredit("ФЛ стандарт", newCreditREF);
+        briefcaseNewCreditFoPage.chooseCredit(newCreditREF);
         briefcaseNewCreditFoPage.сreditAuthorization("0");
         switchWindow.switchToDefaultContent();
 
@@ -127,7 +127,7 @@ public class CreditFoTest {
         filterBeforFillingTable.furtherButtonClick();
         //Портфель Робочих кредитів(Побудава ГПК та Графіку подій по портфелю)
         String workCreditFoBriefcaseWindow = getWebDriver().getWindowHandle();
-        briefcaseNewCreditFoPage.chooseCredit("ФЛ стандарт", newCreditREF);
+        briefcaseNewCreditFoPage.chooseCredit(newCreditREF);
         workCreditFoBriefcasePage.buildRepaymentSchedule();
         switchWindow.forceSwitchToWindow(workCreditFoBriefcaseWindow);
         switchWindow.windowMaximize();
@@ -137,7 +137,7 @@ public class CreditFoTest {
         switchWindow.closeWindow(gpkWindow);
         switchWindow.switchToOldWindow(workCreditFoBriefcaseWindow);
         switchWindow.switchToMainFrame();
-        briefcaseNewCreditFoPage.chooseCredit("ФЛ стандарт", newCreditREF);
+        briefcaseNewCreditFoPage.chooseCredit(newCreditREF);
         workCreditFoBriefcasePage.eventsTimetableOfBriefcaseButton();
         switchWindow.forceSwitchToWindow(workCreditFoBriefcaseWindow);
         switchWindow.windowMaximize();

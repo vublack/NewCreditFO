@@ -14,8 +14,8 @@ class BriefcaseNewCreditFoPage {
         $(byXpath("//span[@class='x-btn-icon-el x-tbar-loading ']")).shouldBe(visible).click();
         $(byXpath("//*[@class = 'x-mask-msg-text']")).shouldNotBe(visible);
     }
-    void chooseCredit(String creditType, String refCredit){
-        $(byXpath("//*[text()='"+creditType+"']/preceding::*[text()='"+refCredit+"']")).shouldBe(visible).click();
+    void chooseCredit(String refCredit){
+        $(byXpath("//*[text()='"+refCredit+"']")).shouldBe(visible).click();
     }
     void сreditAuthorization(String autorizationType){
         $(byXpath("//a[@data-qtip='КД: Авторизація КД']")).shouldBe(visible).click();
